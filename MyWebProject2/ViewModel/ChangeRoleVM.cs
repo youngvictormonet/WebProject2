@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Microsoft.AspNetCore.Identity;
 namespace MyWebProject2.ViewModel
 {
     public class ChangeRoleVM
@@ -12,7 +12,7 @@ namespace MyWebProject2.ViewModel
         public List<IdentityRole> AllRoles { get; set; }
         public IList<string> UserRoles { get; set; }
 
-        public ChangeRoleViewModel()
+        public ChangeRoleVM()
         {
             AllRoles = new List<IdentityRole>();
             UserRoles = new List<string>();
