@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using MyWebProject2.Data;
+using WebShop.Data.Models;
 namespace MyWebProject2.Data
 {
     public class RoleInitializer

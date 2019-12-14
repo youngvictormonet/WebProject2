@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MyWebProject2.ViewModel;
 using Microsoft.AspNetCore.Identity;
-
+using WebShop.Data.Models;
 namespace MyWebProject2.Controllers
 {
     public class AccountController:Controller
