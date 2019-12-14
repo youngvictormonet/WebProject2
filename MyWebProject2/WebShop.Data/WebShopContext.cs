@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-
+using WebShop.WebShop.Data.Models;
 namespace WebShop.Data.Models
 {
         public class WebShopContext : IdentityDbContext<ShopUser>

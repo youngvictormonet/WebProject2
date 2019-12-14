@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.AspNetCore.Identity;
 namespace WebShop.Data
 {
-    class ShopUser
+    public class ShopUser : IdentityUser
     {
     }
 }
