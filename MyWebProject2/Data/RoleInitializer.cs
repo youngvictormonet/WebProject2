@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using MyWebProject2.Data;
 using WebShop.Data.Models;
+using WebShop.WebShop.Data.Models;
+using WebShop.Data;
 namespace MyWebProject2.Data
 {
     public class RoleInitializer
@@ -41,4 +43,4 @@ namespace MyWebProject2.Data
         }
     }
 }
-}
+

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using MyWebProject2.ViewModel;
+using WebShop.ViewModel;
+using WebShop.WebShop.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using WebShop.Data.Models;
+using WebShop.Data;
+using MyWebProject2.ViewModel;
 namespace MyWebProject2.Controllers
 {
     public class AccountController:Controller
@@ -24,20 +24,15 @@ namespace MyWebProject2.Controllers
         [HttpGet]
         public IActionResult Register(string returnUrl = null)
         {
-            return View(new RegisterViewModel { ReturnUrl = returnUrl });
+            return View(new RegisterVM { ReturnUrl = returnUrl });
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterViewModel model)
+        public async Task<IActionResult> Register(RegisterVM model)
         {
             ShopUser user = new ShopUser { Email = model.Email, UserName = model.UserName };
 
-            if (user.UserName[user.UserName.IndexOf(' ') + 1] == ' ' ||
-                user.UserName[0] == ' '
-                )
-            { ModelState.AddModelError(string.Empty, "Invalid name."); }
-            else
-            {
+            
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -62,18 +57,18 @@ namespace MyWebProject2.Controllers
                         ModelState.AddModelError(string.Empty, error.Description);
                     }
                 }
-            }
+            
             return View(model);
         }
 
         [HttpGet]
         public IActionResult Login(string returnUrl = null)
         {
-            return View(new LoginViewModel { ReturnUrl = returnUrl });
+            return View(new LoginVM { ReturnUrl = returnUrl });
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginVM model)
         {
             if (ModelState.IsValid)
             {
@@ -81,7 +76,7 @@ namespace MyWebProject2.Controllers
                     await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, false);
                 if (result.Succeeded)
                 {
-                    if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
+                    if (!string.IsNullOrEmpty(model.ReturnUrl))
                     {
                         return Redirect(model.ReturnUrl);
                     }
@@ -105,4 +100,4 @@ namespace MyWebProject2.Controllers
         }
     }
 }
-}
+

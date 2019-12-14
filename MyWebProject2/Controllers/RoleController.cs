@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using MyWebProject2.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using MyWebProject2.Data;
-
+using WebShop.Data;
 namespace MyWebProject2.Controllers
 {
     public class RoleController
@@ -69,7 +69,7 @@ namespace MyWebProject2.Controllers
                 {
                     var userRoles = await _userManager.GetRolesAsync(user);
                     var allRoles = _roleManager.Roles.ToList();
-                    ChangeRoleViewModel model = new ChangeRoleViewModel
+                    ChangeRoleVM model = new ChangeRoleVM
                     {
                         UserId = user.Id,
                         UserName = user.UserName,

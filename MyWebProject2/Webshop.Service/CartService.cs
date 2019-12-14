@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebShop.Data.Interfaces;
 using WebShop.Data.Models;
+using WebShop.WebShop.Data.Models;
 
 namespace Webshop.Service
 {

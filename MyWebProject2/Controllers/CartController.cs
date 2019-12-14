@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using WebShop.Data.Interfaces;
 using WebShop.Data.Models;
 using MyWebProject2.ViewModel;
-
+using WebShop.Data;
+using WebShop.ViewModel.Cart;
 namespace WebShop.Controllers
 {
     public class CartController:Controller
@@ -92,4 +93,4 @@ namespace WebShop.Controllers
         }
     }
 }
-}
+

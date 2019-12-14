@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using MyWebProject2.Data;
 using Microsoft.AspNetCore.Authorization;
 using MyWebProject2.ViewModel;
-
+using WebShop.Data;
 namespace MyWebProject2.Controllers
 {
     public class UserContoller
@@ -25,7 +25,7 @@ namespace MyWebProject2.Controllers
             public IActionResult Create() => View();
 
             [HttpPost]
-            public async Task<IActionResult> Create(CreateUserViewModel model)
+            public async Task<IActionResult> Create(CreateUserVM model)
             {
                 if (ModelState.IsValid)
                 {
@@ -58,12 +58,12 @@ namespace MyWebProject2.Controllers
                 {
                     return NotFound();
                 }
-                EditUserViewModel model = new EditUserViewModel { Id = user.Id, Email = user.Email, UserName = user.UserName };
+                EditUserVM model = new EditUserVM { Id = user.Id, Email = user.Email, UserName = user.UserName };
                 return View(model);
             }
 
             [HttpPost]
-            public async Task<IActionResult> Edit(EditUserViewModel model)
+            public async Task<IActionResult> Edit(EditUserVM model)
             {
                 if (ModelState.IsValid)
                 {
@@ -112,12 +112,12 @@ namespace MyWebProject2.Controllers
                 {
                     return NotFound();
                 }
-                ChangePasswordViewModel model = new ChangePasswordViewModel { Id = user.Id, Name = user.UserName };
+                ChangePasswordVM model = new ChangePasswordVM { Id = user.Id, Name = user.UserName };
                 return View(model);
             }
 
             [HttpPost]
-            public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+            public async Task<IActionResult> ChangePassword(ChangePasswordVM model)
             {
                 if (ModelState.IsValid)
                 {

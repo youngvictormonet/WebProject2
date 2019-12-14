@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using WebShop.Data.Models;
 
 namespace WebShop.Data.Interfaces
 {
-    class IShopUser
+    public interface IShopUser
     {
+        ShopUser GetById(string id);
+        IEnumerable<ShopUser> GetAll();
     }
 }
