@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace WebShop.ViewModel.Product
 {
-    public class ProductDetailModel : ProductListingModel
+    public class ProductIndexModel
     {
-        public string Description { get; set; }
+        public IEnumerable<ProductListingModel> ProductList { get; set; }
     }
 }

@@ -32,7 +32,12 @@ namespace MyWebProject2.Controllers
         {
             ShopUser user = new ShopUser { Email = model.Email, UserName = model.UserName };
 
-            
+            if (user.UserName[user.UserName.IndexOf(' ') + 1] == ' ' ||
+                user.UserName[0] == ' '
+                )
+            { ModelState.AddModelError(string.Empty, "Invalid name."); }
+            else
+            {
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -57,7 +62,7 @@ namespace MyWebProject2.Controllers
                         ModelState.AddModelError(string.Empty, error.Description);
                     }
                 }
-            
+            }
             return View(model);
         }
 
@@ -76,7 +81,7 @@ namespace MyWebProject2.Controllers
                     await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, false);
                 if (result.Succeeded)
                 {
-                    if (!string.IsNullOrEmpty(model.ReturnUrl))
+                    if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
                     {
                         return Redirect(model.ReturnUrl);
                     }
