@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WebShop.Service
+namespace Webshop.Service
 {
     class Program
     {
