@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using WebShop.WebShop.Data.Models;
 using WebShop.Data.Models;
+
 namespace WebShop.Data.Interfaces
 {
     public interface ICart
