@@ -6,5 +6,6 @@ namespace WebShop.ViewModels.Product
   {
         public PageViewModal PageViewModel { get; set; }
         public IEnumerable<ProductListingModel> ProductList { get; set; }
-  }
+        public SortViewModel SortViewModel { get; set; }
+    }
 }

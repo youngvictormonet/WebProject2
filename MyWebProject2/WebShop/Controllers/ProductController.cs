@@ -27,9 +27,8 @@ namespace WebShop.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index(int page = 1)
+        public IActionResult Index(int page = 1, SortState sortOrder = SortState.NameAsc)
         {
-            int pageSize = 8;
             IEnumerable<ProductListingModel> products = _productService.GetAll().Select(product => new ProductListingModel
             {
                 Id = product.Id,
@@ -37,12 +36,32 @@ namespace WebShop.Controllers
                 ImageURL = product.ImageURL,
                 Price = product.Price
             });
+
+            switch (sortOrder)
+            {
+                case SortState.NameDesc:
+                    products = products.OrderByDescending(s => s.Name);
+                    break;
+                case SortState.PriceAsc:
+                    products = products.OrderBy(s => s.Price);
+                    break;
+                case SortState.PriceDesc:
+                    products = products.OrderByDescending(s => s.Price);
+                    break;
+                default:
+                    products = products.OrderBy(s => s.Name);
+                    break;
+            }
+
+            int pageSize = 8;
+
             var count = products.Count();
             var items = products.Skip((page - 1) * pageSize).Take(pageSize).ToList();
             PageViewModal pageViewModel = new PageViewModal(count, page, pageSize);
             ProductIndexModel model = new ProductIndexModel
             {
                 PageViewModel = pageViewModel,
+                SortViewModel = new SortViewModel(sortOrder),
                 ProductList = items.AsEnumerable()
             };
 
