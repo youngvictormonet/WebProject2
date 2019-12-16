@@ -17,7 +17,7 @@
         font-size: inherit;
         text-rendering: auto;
         -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+        -moz-osx-font-smoothing: grayscale
     }
 
     .glyphicon-chevron-right:before {
@@ -70,72 +70,73 @@
     }
     else
     {
-<div class="catalog">
-    <form method="get">
-        <div class="form-inline">
-            <label>Имя: </label>
-            <input name="name" value="@Model.FilterViewModel.SelectedName" class="form-control" />
+        <form method="get">
+            <div class="form-inline">
+                <label>Name: </label>
+                <input name="name" value="@Model.FilterViewModel.SelectedName" class="form-control" />
 
-            <label>Компания: </label>
-            <select name="company" asp-items="Model.FilterViewModel.Companies" class="form-control"></select>
-
-            <input type="submit" value="Фильтр" class="btn btn-outline-dark" />
-        </div>
-    </form>
-    <tr>
-        <th>
-            <a asp-action="Index"
-               asp-route-sortOrder="@(Model.SortViewModel.NameSort)"
-                              asp-route-name="@(Model.FilterViewModel.SelectedName)"
-               asp-route-company="@(Model.FilterViewModel.SelectedCompany)">Name</a>
-        </th>
-        <th>
-            <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.PriceSort)"
-                              asp-route-name="@(Model.FilterViewModel.SelectedName)"
-               asp-route-company="@(Model.FilterViewModel.SelectedCompany)">Price</a>
-        </th>
-    </tr>
-    @foreach (var product in Model.ProductList)
-    {
-        <form method="post">
-            <a asp-area="" asp-controller="Product" asp-action="Details" asp-route-id="@product.Id" class="catalog_item">
-                <div class="catalog_item_img_box">
-                    <img src="@product.ImageURL" alt="@product.Name)"
-                         class="catalog_item_img" />
-                </div>
-                <h2 class="catalog_item_title">@product.Name</h2>
-                <h3 class="catalog_item_price">@string.Format("{0:C}", product.Price)</h3>
-                <input type="submit" asp-area="" asp-controller="Cart" asp-action="AddToCart" asp-route-id="@product.Id" value="buy" class="catalog_item_tocart btn_wide">
-            </a>
-        </form>
-    }
-</div>
-        <div class="pagination">
-        @if (Model.PageViewModel.HasPreviousPage)
-        {
-            <a asp-action="Index"
-               asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
-       asp-route-name="@(Model.FilterViewModel.SelectedName)"
-       asp-route-company="@(Model.FilterViewModel.SelectedCompany)"
-       asp-route-sortorder="@(Model.SortViewModel.Current)"
-               class="btn btn-outline-dark">
-                <i class="glyphicon glyphicon-chevron-left"></i>
-                Back
-            </a>
-        }
-        @if (Model.PageViewModel.HasNextPage)
-        {
-            <a asp-action="Index"
-               asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
-       asp-route-name="@(Model.FilterViewModel.SelectedName)"
-       asp-route-company="@(Model.FilterViewModel.SelectedCompany)"
-       asp-route-sortorder="@(Model.SortViewModel.Current)"
-               class="btn btn-outline-dark">
-                Next
-                <i class="glyphicon glyphicon-chevron-right"></i>
-            </a>
-        }
+                <label>Category: </label>
+                <select name="company" asp-items="Model.FilterViewModel.Companies" class="form-control"></select>
+                <input type="submit" value="Go!" class=" btn-dark" />
+                <br />
+                <br />
+                <label>Sort by: </label>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@(Model.SortViewModel.NameSort)"
+                   asp-route-name="@(Model.FilterViewModel.SelectedName)"
+                   asp-route-company="@(Model.FilterViewModel.SelectedCompany)">Name</a>
+                <a>or</a>
+                <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.PriceSort)"
+                   asp-route-name="@(Model.FilterViewModel.SelectedName)"
+                   asp-route-company="@(Model.FilterViewModel.SelectedCompany)">Price</a>
+                <br />
+                <br />
             </div>
+        </form>
+        <div class="catalog">
+
+
+            @foreach (var product in Model.ProductList)
+            {
+                <form method="post">
+                    <a asp-area="" asp-controller="Product" asp-action="Details" asp-route-id="@product.Id" class="catalog_item">
+                        <div class="catalog_item_img_box">
+                            <img src="@product.ImageURL" alt="@product.Name)"
+                                 class="catalog_item_img" />
+                        </div>
+                        <h2 class="catalog_item_title">@product.Name</h2>
+                        <h3 class="catalog_item_price">@string.Format("{0:C}", product.Price)</h3>
+                        <input type="submit" asp-area="" asp-controller="Cart" asp-action="AddToCart" asp-route-id="@product.Id" value="buy" class="catalog_item_tocart btn_wide">
+                    </a>
+                </form>
+            }
+        </div>
+        <div class="pagination">
+            @if (Model.PageViewModel.HasPreviousPage)
+            {
+                <a asp-action="Index"
+                   asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+                   asp-route-name="@(Model.FilterViewModel.SelectedName)"
+                   asp-route-company="@(Model.FilterViewModel.SelectedCompany)"
+                   asp-route-sortorder="@(Model.SortViewModel.Current)"
+                   class="btn btn-outline-dark">
+                    <i class="glyphicon glyphicon-chevron-left"></i>
+                    Back
+                </a>
+            }
+            @if (Model.PageViewModel.HasNextPage)
+            {
+                <a asp-action="Index"
+                   asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+                   asp-route-name="@(Model.FilterViewModel.SelectedName)"
+                   asp-route-company="@(Model.FilterViewModel.SelectedCompany)"
+                   asp-route-sortorder="@(Model.SortViewModel.Current)"
+                   class="btn btn-outline-dark">
+                    Next
+                    <i class="glyphicon glyphicon-chevron-right"></i>
+                </a>
+            }
+        </div>
     }
 }
 else

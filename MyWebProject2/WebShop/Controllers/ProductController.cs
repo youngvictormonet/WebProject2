@@ -27,20 +27,21 @@ namespace WebShop.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index(int? company, string name, int page = 1,
+        public IActionResult Index(string descr, string name, int page = 1,
             SortState sortOrder = SortState.NameAsc)
         {
             IEnumerable<ProductListingModel> products = _productService.GetAll().Select(product => new ProductListingModel
             {
                 Id = product.Id,
+                Description=product.Description,
                 Name = product.Name,
                 ImageURL = product.ImageURL,
                 Price = product.Price
             });
 
-            if (company != null && company != 0)
+            if (descr != null)
             {
-                products = products.Where(p => p.Id == company);
+                products = products.Where(p => p.Description.Contains(descr));
             }
             if (name != null)
             {
@@ -67,12 +68,12 @@ namespace WebShop.Controllers
 
             var count = products.Count();
             var items = products.Skip((page - 1) * pageSize).Take(pageSize).ToList();
-            PageViewModal pageViewModel = new PageViewModal(count, page, pageSize);
+            //PageViewModal pageViewModel = new PageViewModal(count, page, pageSize);
             ProductIndexModel model = new ProductIndexModel
             {
-                PageViewModel = pageViewModel,
+                PageViewModel =  new PageViewModal(count, page, pageSize),
                 SortViewModel = new SortViewModel(sortOrder),
-                FilterViewModel=new FilterViewModel(products.ToList(), company, name),
+                FilterViewModel=new FilterViewModel(products.ToList(), descr, name),
                 ProductList = items.AsEnumerable()
             };
 
