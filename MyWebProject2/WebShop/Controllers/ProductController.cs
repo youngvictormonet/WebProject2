@@ -27,7 +27,8 @@ namespace WebShop.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index(int page = 1, SortState sortOrder = SortState.NameAsc)
+        public IActionResult Index(int? company, string name, int page = 1,
+            SortState sortOrder = SortState.NameAsc)
         {
             IEnumerable<ProductListingModel> products = _productService.GetAll().Select(product => new ProductListingModel
             {
@@ -36,6 +37,15 @@ namespace WebShop.Controllers
                 ImageURL = product.ImageURL,
                 Price = product.Price
             });
+
+            if (company != null && company != 0)
+            {
+                products = products.Where(p => p.Id == company);
+            }
+            if (name != null)
+            {
+                products = products.Where(p => p.Name.Contains(name));
+            }
 
             switch (sortOrder)
             {
@@ -62,6 +72,7 @@ namespace WebShop.Controllers
             {
                 PageViewModel = pageViewModel,
                 SortViewModel = new SortViewModel(sortOrder),
+                FilterViewModel=new FilterViewModel(products.ToList(), company, name),
                 ProductList = items.AsEnumerable()
             };
 
