@@ -1,14 +1,20 @@
 ﻿using System.Linq;
 using WebShop.Data.Models;
-
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
+using WebShop.Data.Interfaces;
+using System.Collections.Generic;
+using WebShop.ViewModels.Product;
+using WebShop.Controllers;
 namespace WebShop.Data
 {
-    public class DataBaseInitializer
+    public class DataBaseInitializer:Controller
     {
         public static void Initialize(WebShopContext context)
         {
             context.Database.EnsureCreated();
-
+            
             if (context.Products.Any())
             {
                 return;
@@ -38,6 +44,7 @@ namespace WebShop.Data
         new Product{ Name = "Item20", Description = "Powerfull and effective product for you business. With help of this item you can achive everything you want. You'll be happy for sure.", ImageURL = "https://i.imgur.com/ydxzeqI.png", Price = 245.55m},
 
             };
+           
 
             foreach (Product product in products)
             {
@@ -45,5 +52,7 @@ namespace WebShop.Data
             }
             context.SaveChanges();
         }
+
     }
+
 }

@@ -6,8 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using MyWebProject2.ViewModel;
 using Microsoft.AspNetCore.Authorization;
-using MyWebProject2.Data;
-using WebShop.Data;
+using WebShop.Data.Models;
 namespace MyWebProject2.Controllers
 {
     public class RoleController

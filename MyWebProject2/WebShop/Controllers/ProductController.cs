@@ -27,8 +27,9 @@ namespace WebShop.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
+            int pageSize = 8;
             IEnumerable<ProductListingModel> products = _productService.GetAll().Select(product => new ProductListingModel
             {
                 Id = product.Id,
@@ -36,14 +37,18 @@ namespace WebShop.Controllers
                 ImageURL = product.ImageURL,
                 Price = product.Price
             });
-
+            var count = products.Count();
+            var items = products.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            PageViewModal pageViewModel = new PageViewModal(count, page, pageSize);
             ProductIndexModel model = new ProductIndexModel
             {
-                ProductList = products
+                PageViewModel = pageViewModel,
+                ProductList = items.AsEnumerable()
             };
 
             return View(model);
         }
+
 
         [HttpGet]
         public IActionResult Search(string searchQuery)

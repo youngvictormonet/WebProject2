@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
-
+using WebShop.ViewModel.Product;
 namespace WebShop.ViewModels.Product
 {
   public class ProductIndexModel
   {
-    public IEnumerable<ProductListingModel> ProductList { get; set; }
+        public PageViewModal PageViewModel { get; set; }
+        public IEnumerable<ProductListingModel> ProductList { get; set; }
   }
 }

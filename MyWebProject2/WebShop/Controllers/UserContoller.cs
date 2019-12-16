@@ -4,10 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
-using MyWebProject2.Data;
 using Microsoft.AspNetCore.Authorization;
 using MyWebProject2.ViewModel;
-using WebShop.Data;
+using WebShop.Data.Models;
 namespace MyWebProject2.Controllers
 {
     public class UserContoller
